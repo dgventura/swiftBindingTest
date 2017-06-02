@@ -34,9 +34,6 @@ public: void IViewModelListener_OnChange(const std::string& iPropertyName) {
 	NSString* keyPath = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:firstChar];
 	
 	[fMainViewModel onChange:keyPath];
-	
-	UIImage *p;
-	[p imageAsset].
 }
 private: PHMainViewModel* fMainViewModel;
 };

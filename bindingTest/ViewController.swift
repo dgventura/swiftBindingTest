@@ -21,7 +21,7 @@ class ViewController: UIViewController {
 		let viewModel = GetMainViewModelInstance()
 		viewModel!.applySliderValue( 42 )
 		
-		playButton.rx.ob
+//		playButton.rx.ob
 		
 		
 	}
