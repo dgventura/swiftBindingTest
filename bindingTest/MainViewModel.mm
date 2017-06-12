@@ -81,8 +81,12 @@ PHMainViewModel* GetMainViewModelInstance() {
 	
 }
 
+// Swift 4 new keypath, blocks make this easier
+// Swift 5? property behaviours
+// ksworld alan kay thinktank?
+
 - (void)onChange:(NSString*)keyPath {
-	[self willChangeValueForKey:keyPath];
+	[self willChangeValueForKey:keyPath]; // ### DGV: this won't work with KVO's prior option, careful!  Really we shouldn't call didChange until after the change has happened
 	[self didChangeValueForKey:keyPath];
 }
 

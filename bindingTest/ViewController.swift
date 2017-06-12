@@ -23,7 +23,13 @@ class ViewController: UIViewController {
 		
 //		playButton.rx.ob
 		
+		playButton.addObserver(self, forKeyPath: \playButton.state, options: [], context: nil)
 		
+		
+	}
+	
+	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+		print( "hi" )
 	}
 
 	override func didReceiveMemoryWarning() {
