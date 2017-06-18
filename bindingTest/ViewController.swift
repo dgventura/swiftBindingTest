@@ -7,29 +7,30 @@
 //
 
 import UIKit
-import RxSwift
 
 class ViewController: UIViewController {
 
 	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var macroSlider: UISlider!
 	
+	var buttonObserver: NSKeyValueObservation?
+	var sliderObserver: NSKeyValueObservation?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
 		
 		let viewModel = GetMainViewModelInstance()
-		viewModel!.applySliderValue( 42 )
 		
-//		playButton.rx.ob
-		
-		playButton.addObserver(self, forKeyPath: \playButton.state, options: [], context: nil)
-		
-		
-	}
-	
-	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-		print( "hi" )
+		buttonObserver = playButton.observe(\.tracking) { (object, change) in
+			if ( object.isTouchInside )
+			{
+				print("Button was pressed" )
+			}
+		}
+		sliderObserver = macroSlider.observe(\.value) { (object, change) in
+			print("Slider became: \(object.value)" )
+			viewModel!.applySliderValue(object.value)
+		}
 	}
 
 	override func didReceiveMemoryWarning() {

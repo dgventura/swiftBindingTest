@@ -9,7 +9,6 @@
 #import "MainViewModel.h"
 #import <Foundation/FoundationErrors.h>
 #import "ViewModel.hpp"
-#import <RxCocoa/RxCocoa.h>
 #import <UIKit/UIKit.h>
 
 @interface PHMainViewModel()
@@ -90,9 +89,9 @@ PHMainViewModel* GetMainViewModelInstance() {
 	[self didChangeValueForKey:keyPath];
 }
 
-- (void)applySliderValue:(NSInteger)valueFrom0to100;
+- (void)applySliderValue:(float)valueFrom0to1;
 {
-	NSLog( @"Slider changed to %ld", (long)valueFrom0to100 );
+	NSLog( @"Slider changed to %.02f", valueFrom0to1 );
 }
 
 @end

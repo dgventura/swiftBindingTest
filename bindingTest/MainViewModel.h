@@ -13,7 +13,7 @@
 
 @interface PHMainViewModel : NSObject
 
-- (void)applySliderValue:(NSInteger)valueFrom0to100;
+- (void)applySliderValue:(float)valueFrom0to1;
 
 @end
 
