@@ -15,13 +15,7 @@
 		632963C01EDC237A0056F4BF /* bindingTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632963BF1EDC237A0056F4BF /* bindingTestTests.swift */; };
 		632963CB1EDC237A0056F4BF /* bindingTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632963CA1EDC237A0056F4BF /* bindingTestUITests.swift */; };
 		632963DC1EDC4F0E0056F4BF /* MainViewModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 632963D91EDC23A50056F4BF /* MainViewModel.mm */; };
-		63CB55721EE02E6A0083B57B /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CB556E1EE02E6A0083B57B /* RxBlocking.framework */; };
-		63CB55731EE02E6A0083B57B /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CB556F1EE02E6A0083B57B /* RxCocoa.framework */; };
-		63CB55771EE02F350083B57B /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CB55701EE02E6A0083B57B /* RxSwift.framework */; };
-		63CB55791EE02F9C0083B57B /* RxBlocking.framework in Carthage */ = {isa = PBXBuildFile; fileRef = 63CB556E1EE02E6A0083B57B /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		63CB557A1EE02F9C0083B57B /* RxCocoa.framework in Carthage */ = {isa = PBXBuildFile; fileRef = 63CB556F1EE02E6A0083B57B /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		63CB557B1EE02F9C0083B57B /* RxSwift.framework in Carthage */ = {isa = PBXBuildFile; fileRef = 63CB55701EE02E6A0083B57B /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		63CB557E1EE030200083B57B /* ViewModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63CB557C1EE030200083B57B /* ViewModel.cpp */; };
+		63DB18F92008EBB8008E9F3A /* ViewModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63DB18F72008EBB8008E9F3A /* ViewModel.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +42,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				63CB55791EE02F9C0083B57B /* RxBlocking.framework in Carthage */,
-				63CB557A1EE02F9C0083B57B /* RxCocoa.framework in Carthage */,
-				63CB557B1EE02F9C0083B57B /* RxSwift.framework in Carthage */,
 			);
 			name = Carthage;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,12 +65,8 @@
 		632963D81EDC23A50056F4BF /* bindingTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bindingTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		632963D91EDC23A50056F4BF /* MainViewModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewModel.mm; sourceTree = "<group>"; };
 		632963DB1EDC23D20056F4BF /* MainViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewModel.h; sourceTree = "<group>"; };
-		63CB556E1EE02E6A0083B57B /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
-		63CB556F1EE02E6A0083B57B /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		63CB55701EE02E6A0083B57B /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		63CB55711EE02E6A0083B57B /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
-		63CB557C1EE030200083B57B /* ViewModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ViewModel.cpp; path = ../ViewModel.cpp; sourceTree = "<group>"; };
-		63CB557D1EE030200083B57B /* ViewModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ViewModel.hpp; path = ../ViewModel.hpp; sourceTree = "<group>"; };
+		63DB18F72008EBB8008E9F3A /* ViewModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ViewModel.cpp; sourceTree = "<group>"; };
+		63DB18F82008EBB8008E9F3A /* ViewModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ViewModel.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +74,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63CB55731EE02E6A0083B57B /* RxCocoa.framework in Frameworks */,
-				63CB55721EE02E6A0083B57B /* RxBlocking.framework in Frameworks */,
-				63CB55771EE02F350083B57B /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,8 +118,8 @@
 		632963A91EDC237A0056F4BF /* bindingTest */ = {
 			isa = PBXGroup;
 			children = (
-				63CB557C1EE030200083B57B /* ViewModel.cpp */,
-				63CB557D1EE030200083B57B /* ViewModel.hpp */,
+				63DB18F72008EBB8008E9F3A /* ViewModel.cpp */,
+				63DB18F82008EBB8008E9F3A /* ViewModel.hpp */,
 				632963D91EDC23A50056F4BF /* MainViewModel.mm */,
 				632963DB1EDC23D20056F4BF /* MainViewModel.h */,
 				632963AA1EDC237A0056F4BF /* AppDelegate.swift */,
@@ -170,10 +154,6 @@
 		63CB55761EE02E890083B57B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				63CB556E1EE02E6A0083B57B /* RxBlocking.framework */,
-				63CB556F1EE02E6A0083B57B /* RxCocoa.framework */,
-				63CB55701EE02E6A0083B57B /* RxSwift.framework */,
-				63CB55711EE02E6A0083B57B /* RxTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -242,24 +222,26 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Propellerhead AB";
 				TargetAttributes = {
 					632963A61EDC237A0056F4BF = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = F5JV2QEVE9;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					632963BA1EDC237A0056F4BF = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = F5JV2QEVE9;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 632963A61EDC237A0056F4BF;
 					};
 					632963C51EDC237A0056F4BF = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = F5JV2QEVE9;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 632963A61EDC237A0056F4BF;
 					};
@@ -319,7 +301,7 @@
 			files = (
 				632963AD1EDC237A0056F4BF /* ViewController.swift in Sources */,
 				632963AB1EDC237A0056F4BF /* AppDelegate.swift in Sources */,
-				63CB557E1EE030200083B57B /* ViewModel.cpp in Sources */,
+				63DB18F92008EBB8008E9F3A /* ViewModel.cpp in Sources */,
 				632963DC1EDC4F0E0056F4BF /* MainViewModel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +367,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -393,7 +377,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -436,7 +424,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -444,7 +434,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -487,7 +481,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bindingTest/bindingTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -507,7 +502,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = se.propellerheads.bindingTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bindingTest/bindingTest-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -521,7 +517,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.propellerheads.bindingTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bindingTest.app/bindingTest";
 			};
 			name = Debug;
@@ -536,7 +533,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.propellerheads.bindingTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bindingTest.app/bindingTest";
 			};
 			name = Release;
@@ -550,7 +548,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.propellerheads.bindingTestUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = bindingTest;
 			};
 			name = Debug;
@@ -564,7 +563,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.propellerheads.bindingTestUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = bindingTest;
 			};
 			name = Release;

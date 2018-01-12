@@ -9,12 +9,22 @@
 #import "MainViewModel.h"
 #import <Foundation/FoundationErrors.h>
 #import "ViewModel.hpp"
-#import <RxCocoa/RxCocoa.h>
 #import <UIKit/UIKit.h>
 
-@interface PHMainViewModel()
-- (void)onChange:(NSString*)keyPath;
+@implementation WrappedClass
+
+- (id)initWithColumn:(NSInteger)c andRow:(NSInteger)r
+{
+	self = [super init];
+	
+	_column = c;
+	_row = r;
+	
+	return self;
+}
+
 @end
+
 
 static PHMainViewModel* gInstance = nil;
 
@@ -27,16 +37,22 @@ public: CViewModelListener(PHMainViewModel* iMainViewModel) :
 	{
 	}
 	
-public: void IViewModelListener_OnChange(const std::string& iPropertyName) {
+public: void IViewModelListener_WillChange(const std::string& iPropertyName) {
 	NSString* propertyName = [NSString stringWithUTF8String:iPropertyName.c_str()];
 	
 	NSString* firstChar = [[propertyName substringToIndex:1] lowercaseString];
 	NSString* keyPath = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:firstChar];
 	
-	[fMainViewModel onChange:keyPath];
+	[fMainViewModel willChange:keyPath];
+}
 	
-	UIImage *p;
-	[p imageAsset].
+public: void IViewModelListener_DidChange(const std::string& iPropertyName) {
+	NSString* propertyName = [NSString stringWithUTF8String:iPropertyName.c_str()];
+	
+	NSString* firstChar = [[propertyName substringToIndex:1] lowercaseString];
+	NSString* keyPath = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:firstChar];
+	
+	[fMainViewModel didChange:keyPath];
 }
 private: PHMainViewModel* fMainViewModel;
 };
@@ -84,14 +100,44 @@ PHMainViewModel* GetMainViewModelInstance() {
 	
 }
 
-- (void)onChange:(NSString*)keyPath {
+- (void)willChange:(NSString *)keyPath {
 	[self willChangeValueForKey:keyPath];
+}
+
+- (void)didChange:(NSString*)keyPath {
 	[self didChangeValueForKey:keyPath];
+}
+
+- (NSInteger)intValue
+{
+	return fViewModel->GetIntegerValue();
 }
 
 - (void)applySliderValue:(NSInteger)valueFrom0to100;
 {
 	NSLog( @"Slider changed to %ld", (long)valueFrom0to100 );
+	fViewModel->SetIntegerValue( (int)valueFrom0to100 );
+}
+
+- (NSInteger)countOfArrayValue
+{
+	return fViewModel->GetVectorData().size();
+}
+
+- (NSArray<WrappedClass*>*)arrayValue
+{
+	NSMutableArray<WrappedClass*>* proxyData = [[NSMutableArray alloc] initWithCapacity:fViewModel->GetVectorData().size()];
+	for ( int i = 0; i < fViewModel->GetVectorData().size(); ++i )
+	{
+		std::pair< int, int > pair = fViewModel->GetVectorData()[i];
+		[proxyData addObject:[[WrappedClass alloc] initWithColumn: pair.first andRow: pair.second]];
+	}
+	return proxyData;
+}
+
+- (id)objectInArrayValueAtIndex:(NSUInteger)index {
+	std::pair< int, int > pair = fViewModel->GetVectorData()[index];
+	return [[WrappedClass alloc] initWithColumn: pair.first andRow: pair.second];
 }
 
 @end

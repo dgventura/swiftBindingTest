@@ -11,9 +11,21 @@
 
 #import <Foundation/Foundation.h>
 
+@interface WrappedClass : NSObject
+
+@property (nonatomic, readonly) NSInteger column;
+@property (nonatomic, readonly) NSInteger row;
+
+@end
+
 @interface PHMainViewModel : NSObject
 
 - (void)applySliderValue:(NSInteger)valueFrom0to100;
+- (void)willChange:(NSString*)keyPath;
+- (void)didChange:(NSString*)keyPath;
+
+@property (nonatomic, readonly) NSInteger intValue;
+@property (nonatomic, readonly) NSArray<WrappedClass*>* arrayValue;
 
 @end
 
