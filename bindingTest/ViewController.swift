@@ -1,4 +1,4 @@
-//
+ //
 //  ViewController.swift
 //  bindingTest
 //
@@ -30,8 +30,10 @@ class ViewController: UIViewController {
 		
 		arrayObservation = viewModel?.observe(\.arrayValue, options: [.new, .old]) { object, change in
 			
-		//	print( "old value was: " + String(change.oldValue!) )
-		//	print( "new value is: " + String(change.newValue!) )
+			print( "array is: " + String(describing: object) )
+//			print( "old value was: " + String(change.oldValue!) )
+			print( "new value is: " + String(describing: change.newValue!) )
+			self.pairList.reloadData()
 		}
 	}
 
@@ -44,7 +46,20 @@ class ViewController: UIViewController {
 
 extension ViewController : UITableViewDelegate
 {
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
 	
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+		return .delete
+	}
+	
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		if ( editingStyle == .delete )
+		{
+			GetMainViewModelInstance().arrayValue.removeObject(at: indexPath.row)
+		}
+	}
 }
 
 extension ViewController: UITableViewDataSource {
@@ -54,7 +69,7 @@ extension ViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "tempCellId")
 		
-		let data = GetMainViewModelInstance().arrayValue[indexPath.row]
+		let data : WrappedClass = GetMainViewModelInstance().arrayValue.object(at: indexPath.row) as! WrappedClass
 		let formattedText = "<" + String(data.column) + ", " + String(data.row) + ">"
 		cell!.textLabel?.text = formattedText
 		

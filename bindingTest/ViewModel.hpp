@@ -9,10 +9,11 @@
 #ifndef ViewModel_hpp
 #define ViewModel_hpp
 
-//#include "Parts/MobileJukebox/Klister/MOMSubscriber.h"
 #include <string>
 #include <vector>
 #include <map>
+
+typedef std::pair<int, int> SData;
 
 class IViewModelListener {
 public: virtual void IViewModelListener_WillChange(const std::string& iPropertyName) = 0;
@@ -20,20 +21,20 @@ public: virtual void IViewModelListener_DidChange(const std::string& iPropertyNa
 };
 
 class CViewModel {
-public: CViewModel(IViewModelListener& iObserver);
+public:
+	CViewModel(IViewModelListener& iObserver);
 	
-#if DEBUG
-public:  bool CheckInvariant() const;
-#endif // DEBG
-
-public: int GetIntegerValue() const;
-public: void SetIntegerValue( int value );
+	int GetIntegerValue() const;
+	void SetIntegerValue( int value );
 	
-public: const std::vector< std::pair<int, int> >& GetVectorData() const;
+	const std::vector< SData >& GetVectorData() const;
+	void AddDataToVector( SData data, uint32_t index );
+	void RemoveData( uint32_t index );
 	
-private: IViewModelListener& fListener;
-private: int fIntValue;
-private: std::vector< std::pair<int, int> > fPairVector;
+private:
+	IViewModelListener& fListener;
+	int fIntValue;
+	std::vector< SData > fPairVector;
 };
 
 #endif /* ViewModel_hpp */

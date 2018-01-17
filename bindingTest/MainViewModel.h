@@ -25,7 +25,7 @@
 - (void)didChange:(NSString*)keyPath;
 
 @property (nonatomic, readonly) NSInteger intValue;
-@property (nonatomic, readonly) NSArray<WrappedClass*>* arrayValue;
+@property (nonatomic, strong) NSMutableArray<WrappedClass*>* arrayValue;
 
 @end
 

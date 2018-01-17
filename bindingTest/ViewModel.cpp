@@ -33,3 +33,15 @@ const std::vector< std::pair<int, int> >& CViewModel::GetVectorData() const
 {
 	return fPairVector;
 }
+
+void CViewModel::AddDataToVector( SData data, uint32_t index )
+{
+	fPairVector.insert( fPairVector.begin() + index, data );
+}
+
+void CViewModel::RemoveData( uint32_t index )
+{
+	fListener.IViewModelListener_WillChange( "arrayValue" );
+	fPairVector.erase( fPairVector.begin() + index );
+	fListener.IViewModelListener_DidChange( "arrayValue" );
+}
