@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l1q-kz-qS5">
-                                <rect key="frame" x="16" y="122" width="343" height="525"/>
+                                <rect key="frame" x="16" y="139" width="343" height="508"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tempCellId" id="J7z-kn-yD8">
@@ -41,13 +41,13 @@
                                 </connections>
                             </tableView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fl7-AD-hAD">
-                                <rect key="frame" x="14" y="13" width="347" height="31"/>
+                                <rect key="frame" x="14" y="30" width="347" height="31"/>
                                 <connections>
                                     <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="gaS-Oo-w8U"/>
                                 </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0y0-jU-aCW">
-                                <rect key="frame" x="136" y="84" width="102" height="30"/>
+                                <rect key="frame" x="136" y="101" width="102" height="30"/>
                                 <state key="normal" title="Insert new pair"/>
                                 <connections>
                                     <action selector="insertPairTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PsR-On-ReK"/>
@@ -66,9 +66,8 @@
                             <constraint firstItem="0y0-jU-aCW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="osD-Em-MCG"/>
                             <constraint firstItem="l1q-kz-qS5" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="p9R-uD-MfL"/>
                             <constraint firstItem="0y0-jU-aCW" firstAttribute="top" secondItem="fl7-AD-hAD" secondAttribute="bottom" constant="41" id="pzW-6P-coJ"/>
-                            <constraint firstItem="fl7-AD-hAD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-7" id="tS5-xI-LRP"/>
                             <constraint firstAttribute="trailing" secondItem="fl7-AD-hAD" secondAttribute="trailing" constant="16" id="u03-K5-qHT"/>
-                            <constraint firstItem="fl7-AD-hAD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="13" id="ugW-y8-zKw"/>
+                            <constraint firstItem="fl7-AD-hAD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="30" id="ugW-y8-zKw"/>
                         </constraints>
                     </view>
                     <connections>
