@@ -3,7 +3,6 @@
 //  bindingTest
 //
 //  Created by David Ventura on 2017/05/29.
-//  Copyright © 2017年 Propellerhead AB. All rights reserved.
 //
 
 import UIKit
