@@ -17,8 +17,9 @@ class ViewController: UIViewController {
 	private var integerObservation: NSKeyValueObservation?
 	private var arrayObservation: NSKeyValueObservation?
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	override func viewWillAppear(_ animated: Bool)
+	{
+		super.viewWillAppear( animated )
 		
 		let viewModel = GetMainViewModelInstance()
 		
@@ -31,15 +32,35 @@ class ViewController: UIViewController {
 		arrayObservation = viewModel?.observe(\.arrayValue, options: [.new, .old]) { object, change in
 			
 			print( "array is: " + String(describing: object) )
-//			print( "old value was: " + String(change.oldValue!) )
-			print( "new value is: " + String(describing: change.newValue!) )
-			self.pairList.reloadData()
+			if ( change.kind == .removal )
+			{
+				print( "removed old value was: " + String(describing: change.oldValue) )
+				let removedRow = change.indexes!.min()
+				let indexPath = IndexPath(row: removedRow!, section: 0);
+				self.pairList.deleteRows(at: [indexPath], with: .fade)
+			}
+			else if ( change.kind == .insertion )
+			{
+				print( "inserted new value is: " + String(describing: change.newValue) )
+				let addedRow = change.indexes!.min()
+				let indexPath = IndexPath(row: addedRow!, section: 0);
+				self.pairList.insertRows(at: [indexPath], with: .fade)
+			}
+			else
+			{
+				self.pairList.reloadData()
+			}
 		}
 	}
 
 	@IBAction func sliderChanged(_ sender: Any) {
 		let slider = sender as! UISlider
 		GetMainViewModelInstance().applySliderValue(Int(slider.value))
+	}
+	
+	
+	@IBAction func insertPairTapped(_ sender: Any) {
+		GetMainViewModelInstance().applyButtonTap()
 	}
 	
 }

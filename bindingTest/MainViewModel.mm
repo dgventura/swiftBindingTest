@@ -38,22 +38,49 @@ public: CViewModelListener(PHMainViewModel* iMainViewModel) :
 	{
 	}
 	
-public: void IViewModelListener_WillChange(const std::string& iPropertyName) {
+public: void IViewModelListener_WillChange(const std::string& iPropertyName, int iOperationType = 1, std::vector<int>* iIndices = NULL ) {
 	NSString* propertyName = [NSString stringWithUTF8String:iPropertyName.c_str()];
 	
 	NSString* firstChar = [[propertyName substringToIndex:1] lowercaseString];
 	NSString* keyPath = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:firstChar];
 	
-	[fMainViewModel willChange:keyPath];
+	NSMutableIndexSet* indices = nil;
+	if ( iIndices && iIndices->size() )
+	{
+		indices = [NSMutableIndexSet indexSetWithIndex:(*iIndices)[0]];
+		for ( int i = 1; i < iIndices->size(); ++i )
+		{
+			[indices addIndex:(*iIndices)[i]];
+		}
+		[fMainViewModel willChange:(NSKeyValueChange)iOperationType valuesAtIndexes:indices forKey:keyPath];
+	}
+	else
+	{
+		[fMainViewModel willChangeValueForKey:keyPath];
+	}
 }
 	
-public: void IViewModelListener_DidChange(const std::string& iPropertyName) {
+public: void IViewModelListener_DidChange(const std::string& iPropertyName, int iOperationType = 1, std::vector<int>* iIndices = NULL ) {
 	NSString* propertyName = [NSString stringWithUTF8String:iPropertyName.c_str()];
 	
 	NSString* firstChar = [[propertyName substringToIndex:1] lowercaseString];
 	NSString* keyPath = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:firstChar];
 	
-	[fMainViewModel didChange:keyPath];
+	NSMutableIndexSet* indices = nil;
+	if ( iIndices && iIndices->size() )
+	{
+		indices = [NSMutableIndexSet indexSetWithIndex:(*iIndices)[0]];
+		for ( int i = 1; i < iIndices->size(); ++i )
+		{
+			[indices addIndex:(*iIndices)[i]];
+		}
+		[fMainViewModel didChange:(NSKeyValueChange)iOperationType valuesAtIndexes:indices forKey:keyPath];
+	}
+	else
+	{
+		[fMainViewModel didChangeValueForKey:keyPath];
+	}
+
 }
 private: PHMainViewModel* fMainViewModel;
 };
@@ -85,6 +112,8 @@ PHMainViewModel* GetMainViewModelInstance() {
 	std::unique_ptr<CViewModelListener> fViewModelListener;
 }
 
+@dynamic arrayValue;
+
 - (instancetype)init {
 	self = [super init];
 	if (self != nil) {
@@ -101,28 +130,6 @@ PHMainViewModel* GetMainViewModelInstance() {
 	
 }
 
-- (void)willChange:(NSString *)keyPath {
-	if ( [keyPath isEqualToString:@"arrayValue"] )
-	{
-		[self willChange:NSKeyValueChangeRemoval valuesAtIndexes:[NSIndexSet indexSetWithIndex:1] forKey:keyPath];
-	}
-	else
-	{
-		[self willChangeValueForKey:keyPath];
-	}
-}
-
-- (void)didChange:(NSString*)keyPath {
-	if ( [keyPath isEqualToString:@"arrayValue"] )
-	{
-		[self didChange:NSKeyValueChangeRemoval valuesAtIndexes:[NSIndexSet indexSetWithIndex:1] forKey:keyPath];
-	}
-	else
-	{
-		[self didChangeValueForKey:keyPath];
-	}
-}
-
 - (NSInteger)intValue
 {
 	return fViewModel->GetIntegerValue();
@@ -134,47 +141,60 @@ PHMainViewModel* GetMainViewModelInstance() {
 	fViewModel->SetIntegerValue( (int)valueFrom0to100 );
 }
 
-- (NSUInteger)countOfBackingArrayValue
+- (void)applyButtonTap
+{
+	SData search = std::make_pair<int, int>( 42, 42 );
+	fViewModel->AddDataToVector( search, 0 );
+}
+
+- (NSUInteger)countOfArrayValue
 {
 	return fViewModel->GetVectorData().size();
 }
 
-- (NSMutableArray<WrappedClass*>*)arrayValue
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key
 {
-	/*NSMutableArray<WrappedClass*>* proxyData = [[NSMutableArray alloc] initWithCapacity:fViewModel->GetVectorData().size()];
-	for ( int i = 0; i < fViewModel->GetVectorData().size(); ++i )
-	{
-		std::pair< int, int > pair = fViewModel->GetVectorData()[i];
-		[proxyData addObject:[[WrappedClass alloc] initWithColumn: pair.first andRow: pair.second]];
-	}
-	return proxyData;*/
-	return [self mutableArrayValueForKey:@"backingArrayValue"];
+	if ( [key isEqualToString:@"arrayValue"] )
+		return NO;
+	else
+		return YES;
 }
 
-- (id)objectInBackingArrayValueAtIndex:(NSUInteger)index {
+- (NSMethodSignature*)methodSignatureForSelector:(SEL)sel {
+	if ( sel == @selector(arrayValue) ) {
+		return [super methodSignatureForSelector:@selector( mutableArrayValueForKey: )];
+	} else {
+		return [super methodSignatureForSelector:sel];
+	}
+}
+
+- (void)forwardInvocation:(NSInvocation *)invocation {
+	
+	if ( [invocation selector] == @selector(arrayValue) ) {
+		__unsafe_unretained id value = [self mutableArrayValueForKey:@"arrayValue"];
+		[invocation setReturnValue:&value];
+	}
+}
+
+- (id)objectInArrayValueAtIndex:(NSUInteger)index {
 	std::pair< int, int > pair = fViewModel->GetVectorData()[index];
 	return [[WrappedClass alloc] initWithColumn: pair.first andRow: pair.second];
 }
 
-/*- (NSMutableArray *)mutableArrayValueForKey:(NSString *)key
-{
-	return [self valueForKey:key];
-}*/
-
-- (void)insertObject:(WrappedClass *)object inBackingArrayValueAtIndex:(NSUInteger)index
+- (void)insertObject:(WrappedClass *)object inArrayValueAtIndex:(NSUInteger)index
 {
 	fViewModel->AddDataToVector( std::make_pair( object.row, object.column ), static_cast<uint32_t>(index) );
 }
 
-- (NSUInteger)indexInBackingArrayValueOfObject:(id)object
+- (NSUInteger)indexInArrayValueOfObject:(id)object
 {
 	WrappedClass* castObj = (WrappedClass*)object;
-	SData search = std::make_pair<int, int>( castObj.column, castObj.row );
+	SData search = std::make_pair<int, int>( (int)castObj.column, (int)castObj.row );
 	auto i = std::find(fViewModel->GetVectorData().cbegin(), fViewModel->GetVectorData().cend(), search);
 	return (i == fViewModel->GetVectorData().cend()) ? NSNotFound : (i - fViewModel->GetVectorData().cbegin());
 }
 
-- (NSArray *)backingArrayValueAtIndexes:(NSIndexSet *)indexes
+- (NSArray *)arrayValueAtIndexes:(NSIndexSet *)indexes
 {
 	NSMutableArray<WrappedClass*>* ret = [[NSMutableArray alloc] initWithCapacity:indexes.count];
 	[indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
@@ -198,7 +218,7 @@ PHMainViewModel* GetMainViewModelInstance() {
 	});
 }*/
 
-- (void)insertBackingArrayValue:(NSArray*)array atIndexes:(NSIndexSet*)indexes
+- (void)insertArrayValue:(NSArray*)array atIndexes:(NSIndexSet*)indexes
 {
 	__block NSUInteger idx1 = 0;
 	[indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
@@ -207,12 +227,12 @@ PHMainViewModel* GetMainViewModelInstance() {
 	}];
 }
 
-- (void)removeObjectFromBackingArrayValueAtIndex:(NSUInteger)index
+- (void)removeObjectFromArrayValueAtIndex:(NSUInteger)index
 {
 	fViewModel->RemoveData( static_cast<uint32_t>(index) );
 }
 
-- (void)removeBackingArrayValueAtIndexes:(NSIndexSet*)indexes
+- (void)removeArrayValueAtIndexes:(NSIndexSet*)indexes
 {
 	[indexes enumerateRangesWithOptions:NSEnumerationReverse usingBlock:^(NSRange range, BOOL * _Nonnull stop) {
 		NSAssert( range.length == 1, @"bad" );

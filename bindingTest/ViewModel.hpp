@@ -16,8 +16,8 @@
 typedef std::pair<int, int> SData;
 
 class IViewModelListener {
-public: virtual void IViewModelListener_WillChange(const std::string& iPropertyName) = 0;
-public: virtual void IViewModelListener_DidChange(const std::string& iPropertyName) = 0;
+public: virtual void IViewModelListener_WillChange( const std::string& iPropertyName, int iOperationType = 1, std::vector<int>* iIndices = NULL ) = 0;
+public: virtual void IViewModelListener_DidChange( const std::string& iPropertyName, int iOperationType = 1, std::vector<int>* iIndices = NULL ) = 0;
 };
 
 class CViewModel {

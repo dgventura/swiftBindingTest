@@ -34,14 +34,25 @@ const std::vector< std::pair<int, int> >& CViewModel::GetVectorData() const
 	return fPairVector;
 }
 
+// NSKeyValueChangeSetting = 1
+// NSKeyValueChangeInsertion = 2
+// NSKeyValueChangeRemoval = 3
+// NSKeyValueChangeReplacement = 4
+
 void CViewModel::AddDataToVector( SData data, uint32_t index )
 {
+	std::vector<int> indices;
+	indices.push_back( index );
+	fListener.IViewModelListener_WillChange( "arrayValue", 2, &indices  );
 	fPairVector.insert( fPairVector.begin() + index, data );
+	fListener.IViewModelListener_DidChange( "arrayValue", 2, &indices );
 }
 
 void CViewModel::RemoveData( uint32_t index )
 {
-	fListener.IViewModelListener_WillChange( "arrayValue" );
+	std::vector<int> indices;
+	indices.push_back( index );
+	fListener.IViewModelListener_WillChange( "arrayValue", 3, &indices );
 	fPairVector.erase( fPairVector.begin() + index );
-	fListener.IViewModelListener_DidChange( "arrayValue" );
+	fListener.IViewModelListener_DidChange( "arrayValue", 3, &indices );
 }

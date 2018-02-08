@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,14 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0y0-jU-aCW">
-                                <rect key="frame" x="164" y="20" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l1q-kz-qS5">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l1q-kz-qS5">
                                 <rect key="frame" x="16" y="122" width="343" height="525"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tempCellId" id="J7z-kn-yD8">
@@ -45,15 +40,36 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="F50-zI-YZe"/>
                                 </connections>
                             </tableView>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fl7-AD-hAD">
-                                <rect key="frame" x="14" y="58" width="347" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="fl7-AD-hAD">
+                                <rect key="frame" x="14" y="13" width="347" height="31"/>
                                 <connections>
                                     <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="gaS-Oo-w8U"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0y0-jU-aCW">
+                                <rect key="frame" x="136" y="84" width="102" height="30"/>
+                                <state key="normal" title="Insert new pair"/>
+                                <connections>
+                                    <action selector="insertPairTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PsR-On-ReK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.82273166973008294" green="1" blue="0.91840015879379577" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="l1q-kz-qS5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="2tQ-Hc-WCX"/>
+                            <constraint firstItem="0y0-jU-aCW" firstAttribute="top" secondItem="fl7-AD-hAD" secondAttribute="bottom" constant="41" id="AQG-Hy-3ug"/>
+                            <constraint firstItem="fl7-AD-hAD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="GtV-mb-GXi"/>
+                            <constraint firstItem="l1q-kz-qS5" firstAttribute="top" secondItem="0y0-jU-aCW" secondAttribute="bottom" constant="8" id="HCf-kI-Lg9"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="l1q-kz-qS5" secondAttribute="bottom" constant="20" id="RGN-zB-Sr8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="l1q-kz-qS5" secondAttribute="bottom" constant="20" id="ZkW-1t-cB8"/>
+                            <constraint firstItem="l1q-kz-qS5" firstAttribute="top" secondItem="0y0-jU-aCW" secondAttribute="bottom" constant="8" id="cpI-Gr-5Vb"/>
+                            <constraint firstItem="0y0-jU-aCW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="osD-Em-MCG"/>
+                            <constraint firstItem="l1q-kz-qS5" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="p9R-uD-MfL"/>
+                            <constraint firstItem="0y0-jU-aCW" firstAttribute="top" secondItem="fl7-AD-hAD" secondAttribute="bottom" constant="41" id="pzW-6P-coJ"/>
+                            <constraint firstItem="fl7-AD-hAD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-7" id="tS5-xI-LRP"/>
+                            <constraint firstAttribute="trailing" secondItem="fl7-AD-hAD" secondAttribute="trailing" constant="16" id="u03-K5-qHT"/>
+                            <constraint firstItem="fl7-AD-hAD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="13" id="ugW-y8-zKw"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="macroSlider" destination="fl7-AD-hAD" id="Bav-Qr-TYR"/>

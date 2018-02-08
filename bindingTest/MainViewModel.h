@@ -21,8 +21,7 @@
 @interface PHMainViewModel : NSObject
 
 - (void)applySliderValue:(NSInteger)valueFrom0to100;
-- (void)willChange:(NSString*)keyPath;
-- (void)didChange:(NSString*)keyPath;
+- (void)applyButtonTap;
 
 @property (nonatomic, readonly) NSInteger intValue;
 @property (nonatomic, strong) NSMutableArray<WrappedClass*>* arrayValue;
