@@ -146,7 +146,7 @@ ViewModelBridge* GetMainViewModelInstance() {
 	return fViewModel->GetVectorData().size();
 }
 
-+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString*)key
 {
 	if ( [key isEqualToString:@"arrayValue"] )
 		return NO;
@@ -154,7 +154,7 @@ ViewModelBridge* GetMainViewModelInstance() {
 		return YES;
 }
 
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)sel {
+- (NSMethodSignature*)methodSignatureForSelector:(SEL)sel {
 	if ( sel == @selector(arrayValue) ) {
 		return [super methodSignatureForSelector:@selector( mutableArrayValueForKey: )];
 	} else {
@@ -162,7 +162,7 @@ ViewModelBridge* GetMainViewModelInstance() {
 	}
 }
 
-- (void)forwardInvocation:(NSInvocation *)invocation {
+- (void)forwardInvocation:(NSInvocation*)invocation {
 	
 	if ( [invocation selector] == @selector(arrayValue) ) {
 		__unsafe_unretained id value = [self mutableArrayValueForKey:@"arrayValue"];
@@ -175,7 +175,7 @@ ViewModelBridge* GetMainViewModelInstance() {
 	return [[WrappedClass alloc] initWithColumn: pair.first andRow: pair.second];
 }
 
-- (void)insertObject:(WrappedClass *)object inArrayValueAtIndex:(NSUInteger)index
+- (void)insertObject:(WrappedClass*)object inArrayValueAtIndex:(NSUInteger)index
 {
 	fViewModel->AddDataToVector( std::make_pair( object.row, object.column ), static_cast<uint32_t>(index) );
 }
@@ -188,7 +188,7 @@ ViewModelBridge* GetMainViewModelInstance() {
 	return (i == fViewModel->GetVectorData().cend()) ? NSNotFound : (i - fViewModel->GetVectorData().cbegin());
 }
 
-- (NSArray *)arrayValueAtIndexes:(NSIndexSet *)indexes
+- (NSArray*)arrayValueAtIndexes:(NSIndexSet*)indexes
 {
 	NSMutableArray<WrappedClass*>* ret = [[NSMutableArray alloc] initWithCapacity:indexes.count];
 	[indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
@@ -198,7 +198,7 @@ ViewModelBridge* GetMainViewModelInstance() {
 	return ret;
 }
 
-- (void)insertArrayValue:(NSArray *)array atIndexes:(NSIndexSet *)indexes
+- (void)insertArrayValue:(NSArray*)array atIndexes:(NSIndexSet*)indexes
 {
 	__block NSUInteger idx1 = 0;
 	[indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
