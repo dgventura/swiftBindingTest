@@ -20,27 +20,26 @@ class ViewController: UIViewController {
 	{
 		super.viewWillAppear( animated )
 		
-		let viewModel = GetMainViewModelInstance()
+		let viewModel = GetMainViewModelInstance()!
 		
-		integerObservation = viewModel?.observe(\.intValue, options: [.new, .old]) { object, change in
+		integerObservation = viewModel.observe(\.intValue, options: [.new, .old]) { object, change in
 			
 			print( "old value was: " + String(change.oldValue!) )
 			print( "new value is: " + String(change.newValue!) )
 		}
 		
-		arrayObservation = viewModel?.observe(\.arrayValue, options: [.new, .old]) { object, change in
+		arrayObservation = viewModel.observe(\.arrayValue, options: [.new, .old]) { object, change in
 			
-			print( "array is: " + String(describing: object) )
 			if ( change.kind == .removal )
 			{
-				print( "removed old value was: " + String(describing: change.oldValue) )
+				print( String( format:"removed old value was: %@", change.oldValue! ) )
 				let removedRow = change.indexes!.min()
 				let indexPath = IndexPath(row: removedRow!, section: 0);
 				self.pairList.deleteRows(at: [indexPath], with: .fade)
 			}
 			else if ( change.kind == .insertion )
 			{
-				print( "inserted new value is: " + String(describing: change.newValue) )
+				print( String( format:"inserted new value is: %@", change.newValue! ) )
 				let addedRow = change.indexes!.min()
 				let indexPath = IndexPath(row: addedRow!, section: 0);
 				self.pairList.insertRows(at: [indexPath], with: .fade)
@@ -50,6 +49,13 @@ class ViewController: UIViewController {
 				self.pairList.reloadData()
 			}
 		}
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear( animated )
+		
+		integerObservation = nil
+		arrayObservation = nil
 	}
 
 	@IBAction func sliderChanged(_ sender: Any) {
